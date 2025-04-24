@@ -13,27 +13,27 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #F8F9FA; overflow-x: hidden; }
         /* Transitions */
-        #feedback, .mode-toggle button, #timer-display, #start-button, .mcq-option, #review-screen, .calc-button, .trainer-card, #trainer-view, #dashboard-view, .syllogism-conclusion button, .heatmap-nav button, .heatmap-day {
-            transition: all 0.2s ease-in-out; /* Slightly faster transition */
+        #feedback, .mode-toggle button, #timer-display, #start-button, .mcq-option, #review-screen, .calc-button, .trainer-card, #trainer-view, #dashboard-view, .syllogism-conclusion button, .heatmap-nav button, .heatmap-day, .link-pill, .topic-button {
+            transition: all 0.25s ease-in-out;
         }
         /* Hero Gradient */
-        .hero-gradient { background-image: linear-gradient(to right, #5A4AE8, #7CB9E8); }
+        .hero-gradient { background-image: linear-gradient(105deg, #5A4AE8, #7CB9E8); }
         /* Floating Card Base Style */
-        .trainer-card { border-radius: 16px; padding: 24px; box-shadow: 0px 8px 16px rgba(0,0,0,0.06); position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); }
-         .trainer-card.qr-card { background-color: rgba(109, 90, 224, 0.1); }
-         .trainer-card.dm-card { background-color: rgba(46, 165, 142, 0.1); }
-         .trainer-card.vr-card { background-color: rgba(224, 74, 90, 0.1); }
+        .trainer-card { border-radius: 16px; padding: 24px; box-shadow: 0px 8px 16px rgba(0,0,0,0.06); position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); border: 1px solid rgba(0,0,0,0.03); }
+         .trainer-card.qr-card { background-color: rgba(109, 90, 224, 0.08); }
+         .trainer-card.dm-card { background-color: rgba(46, 165, 142, 0.08); }
+         .trainer-card.vr-card { background-color: rgba(224, 74, 90, 0.08); }
         .trainer-card.visible { opacity: 1; transform: translateY(0); }
-        .trainer-card:hover { transform: translateY(-4px); box-shadow: 0px 12px 24px rgba(0,0,0,0.1); }
+        .trainer-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07), 0 15px 35px rgba(90, 74, 232, 0.1); }
         /* Link Pill Styles */
-        .link-pill { width: 100%; padding: 0.6rem 1rem; margin-bottom: 0.6rem; border-radius: 9999px; font-size: 16px; font-weight: 500; cursor: pointer; text-align: left; border: 1px solid transparent; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .link-pill { width: 100%; padding: 0.7rem 1rem; margin-bottom: 0.6rem; border-radius: 12px; font-size: 15px; font-weight: 500; cursor: pointer; text-align: left; border: 1px solid transparent; background-color: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
         .link-pill:last-child { margin-bottom: 0; }
-        .link-pill.qr-link { background-color: #ffffff; color: #553cde; border-color: #dadaf7;}
-        .link-pill.qr-link:hover { background-color: #f5f3ff; box-shadow: 0 2px 4px rgba(0,0,0,0.08);}
-        .link-pill.dm-link { background-color: #ffffff; color: #1e8a77; border-color: #a6e4d9;}
-        .link-pill.dm-link:hover { background-color: #f0fdfa; box-shadow: 0 2px 4px rgba(0,0,0,0.08);}
-        .link-pill.vr-link { background-color: #ffffff; color: #c73d4e; border-color: #f8d4d8;}
-        .link-pill.vr-link:hover { background-color: #fff1f2; box-shadow: 0 2px 4px rgba(0,0,0,0.08);}
+        .link-pill.qr-link { color: #553cde; border-color: #e0e7ff; }
+        .link-pill.qr-link:hover { background-color: #f5f3ff; border-color: #c7d2fe;}
+        .link-pill.dm-link { color: #1e8a77; border-color: #ccfbf1; }
+        .link-pill.dm-link:hover { background-color: #f0fdfa; border-color: #99f6e4; }
+        .link-pill.vr-link { color: #c73d4e; border-color: #fee2e2; }
+        .link-pill.vr-link:hover { background-color: #fff1f2; border-color: #fecaca; }
         /* MCQ Button Styling */
         .mcq-option { display: flex; align-items: center; justify-content: center; padding: 0.75rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 0.5rem; color: #374151; font-weight: 500; text-align: center; cursor: pointer; min-height: 50px; }
          .mcq-option.qr-accent { background-color: rgba(109, 90, 224, 0.15); border-color: rgba(109, 90, 224, 0.3); color: #3730a3; }
@@ -45,9 +45,9 @@
         .mcq-option.incorrect { background-color: #ef4444 !important; border-color: #dc2626 !important; color: white !important; }
         .mcq-option.correct:disabled, .mcq-option.incorrect:disabled { opacity: 1; }
         /* Background Orb */
-        .background-orb { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(124, 185, 232, 0.3) 0%, rgba(90, 74, 232, 0.1) 70%, rgba(90, 74, 232, 0) 100%); border-radius: 50%; filter: blur(100px); z-index: 0; right: -150px; top: 100px; pointer-events: none; }
-         @media (max-width: 1023px) { .background-orb { width: 400px; height: 400px; right: -100px; top: 50px; filter: blur(80px); } }
-         @media (max-width: 767px) { .background-orb { width: 300px; height: 300px; right: -50px; top: 20px; filter: blur(60px); } }
+        .background-orb { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(124, 185, 232, 0.15) 0%, rgba(90, 74, 232, 0.05) 70%, rgba(90, 74, 232, 0) 100%); border-radius: 50%; filter: blur(120px); z-index: 0; right: -200px; top: 50px; pointer-events: none; }
+         @media (max-width: 1023px) { .background-orb { width: 450px; height: 450px; right: -150px; filter: blur(100px); } }
+         @media (max-width: 767px) { .background-orb { width: 350px; height: 350px; right: -100px; filter: blur(80px); } }
         .hidden { display: none !important; }
         /* Trainer View Specific Styles */
         #trainer-view { background-color: #FFFFFF; border-radius: 16px; padding: 24px; box-shadow: 0px 10px 20px rgba(0,0,0,0.08); margin-top: 2rem; }
@@ -87,36 +87,32 @@
          #user-name { display: inline-block; padding: 2px 6px; border-radius: 4px; outline: none; border: 1px dashed transparent; }
          #user-name:focus { background-color: rgba(0, 0, 0, 0.1); border-color: rgba(0, 0, 0, 0.3); }
 
-        /* Gamification Styles - Calendar Heatmap */
-        #gamification-area { background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0px 10px 20px rgba(0,0,0,0.08); margin-bottom: 2.5rem; }
-        #heatmap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
-        #heatmap-month-year { font-weight: 600; color: #374151; }
-        .heatmap-nav button { background: none; border: none; padding: 0.25rem; cursor: pointer; color: #4b5563; }
+        /* Gamification Styles - Calendar Heatmap - Compact */
+        #gamification-area { background-color: #ffffff; border-radius: 16px; padding: 20px; box-shadow: 0px 6px 12px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+        #heatmap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        #heatmap-month-year { font-weight: 600; color: #374151; font-size: 0.8rem; }
+        .heatmap-nav button { background: none; border: none; padding: 0.1rem; cursor: pointer; color: #4b5563; }
         .heatmap-nav button:hover { color: #1f2937; }
-        #heatmap-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-        .heatmap-day-label { font-size: 0.75rem; text-align: center; color: #6b7280; padding-bottom: 4px;}
-        .heatmap-day {
-            width: 100%; /* Fill grid cell */
-            padding-bottom: 100%; /* Aspect ratio 1:1 */
-            position: relative; /* For potential content inside */
-            border-radius: 3px;
-            background-color: #ebedf0; /* Default gray */
-            border: 1px solid rgba(0,0,0,0.05);
-            overflow: hidden; /* Hide overflow if content added */
-            cursor: default; /* Default cursor */
-        }
-        .heatmap-day.padding { background-color: transparent; border: none; } /* Empty padding days */
+        #heatmap-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+        .heatmap-day-label { font-size: 0.6rem; text-align: center; color: #6b7280; padding-bottom: 2px;}
+        .heatmap-day { width: 100%; padding-bottom: 100%; position: relative; border-radius: 2px; background-color: #ebedf0; border: 1px solid rgba(0,0,0,0.05); overflow: hidden; cursor: default; }
+        .heatmap-day.padding { background-color: transparent; border: none; }
         .heatmap-day[data-level="1"] { background-color: #c6e48b; }
         .heatmap-day[data-level="2"] { background-color: #7bc96f; }
         .heatmap-day[data-level="3"] { background-color: #239a3b; }
         .heatmap-day[data-level="4"] { background-color: #196127; }
+        #gamification-area > .grid { align-items: center; }
+         #gamification-area .heatmap-wrapper { max-width: 200px; margin-left: auto; margin-right: auto; }
+         #gamification-area h3 { font-size: 1rem; }
+         #total-points-display { font-size: 1.875rem; }
+         @media (min-width: 768px) { #gamification-area .heatmap-wrapper { margin-right: 0; } }
 
-
-        /* Explainer Styles */
-         #trainer-explainer { background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; margin-bottom: 1.5rem; text-align: center; }
-         #explainer-text { color: #374151; margin-bottom: 1rem; line-height: 1.6; }
-         #explainer-start-button { display: inline-block; background-color: #4f46e5; color: white; padding: 0.6rem 1.5rem; border-radius: 9999px; font-weight: 500; transition: background-color 0.2s; }
-         #explainer-start-button:hover { background-color: #4338ca; }
+        /* Explainer & Topic Selection Styles */
+         #trainer-explainer, #topic-selection-area { background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; margin-bottom: 1.5rem; text-align: center; }
+         #explainer-text, #topic-selection-area p { color: #374151; margin-bottom: 1rem; line-height: 1.6; }
+         #explainer-start-button, .topic-button { display: inline-block; background-color: #4f46e5; color: white; padding: 0.6rem 1.5rem; border-radius: 9999px; font-weight: 500; transition: background-color 0.2s; border: none; margin: 0.25rem; }
+         #explainer-start-button:hover, .topic-button:hover { background-color: #4338ca; }
+         #loading-indicator { margin-top: 1rem; font-style: italic; color: #6b7280; }
 
     </style>
 </head>
@@ -147,27 +143,29 @@
             </section>
 
              <section id="gamification-area" class="max-w-5xl mx-auto px-4 md:px-8 mt-[-40px] relative z-20">
-                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                     <div class="bg-white rounded-lg p-4 shadow">
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                     <div class="bg-white rounded-lg p-4 shadow text-center md:text-left">
                          <h3 class="text-lg font-semibold text-gray-700 mb-2">Total Points</h3>
                          <p id="total-points-display" class="text-3xl font-bold text-indigo-600">0</p>
                      </div>
                      <div class="bg-white rounded-lg p-4 shadow">
                          <h3 class="text-lg font-semibold text-gray-700 mb-2">Practice Consistency</h3>
-                         <div id="heatmap-controls" class="heatmap-header">
-                             <button id="heatmap-prev" class="heatmap-nav" title="Previous Month">
-                                 <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
-                             </button>
-                             <span id="heatmap-month-year">Month Year</span>
-                             <button id="heatmap-next" class="heatmap-nav" title="Next Month">
-                                 <i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i>
-                             </button>
-                         </div>
-                         <div class="grid grid-cols-7 gap-1 text-center text-xs text-gray-500 mb-1">
-                             <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-                         </div>
-                         <div id="heatmap-calendar-grid" class="heatmap-grid">
+                         <div class="heatmap-wrapper">
+                             <div id="heatmap-controls" class="heatmap-header">
+                                 <button id="heatmap-prev" class="heatmap-nav" title="Previous Month">
+                                     <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
+                                 </button>
+                                 <span id="heatmap-month-year">Month Year</span>
+                                 <button id="heatmap-next" class="heatmap-nav" title="Next Month">
+                                     <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+                                 </button>
                              </div>
+                             <div class="grid grid-cols-7 gap-1 text-center text-xs text-gray-500 mb-1">
+                                 <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                             </div>
+                             <div id="heatmap-calendar-grid" class="heatmap-grid">
+                                 </div>
+                         </div>
                      </div>
                  </div>
              </section>
@@ -185,6 +183,9 @@
                              <button class="link-pill vr-link trainer-button" data-mode="speed-reading">Speed Reading</button>
                              <button class="link-pill vr-link trainer-button" data-mode="gist-training">Gist Training</button>
                              <button class="link-pill vr-link trainer-button" data-mode="pre-selecting">Pre-selecting</button>
+                             <button class="link-pill vr-link trainer-button" data-mode="info-locator">Info Locator</button>
+                             <button class="link-pill vr-link trainer-button" data-mode="key-idea-scan">Key Idea Scanning</button>
+                             <button class="link-pill vr-link trainer-button" data-mode="info-retention">Info Retention</button>
                         </div>
                     </div>
 
@@ -198,6 +199,7 @@
                             <button class="link-pill dm-link trainer-button" data-mode="syllogism-moderate">Syllogisms (Moderate)</button>
                             <button class="link-pill dm-link trainer-button" data-mode="syllogism-advanced">Syllogisms (Advanced)</button>
                             <button class="link-pill dm-link trainer-button" data-mode="venn-diagram">Venn Diagrams</button>
+                            <button class="link-pill dm-link trainer-button" data-mode="logic-puzzles">Logic Puzzles</button>
                         </div>
                     </div>
 
@@ -223,7 +225,19 @@
             </button>
             <h2 id="trainer-title" class="text-2xl font-semibold text-gray-800 mb-6 text-center"></h2>
 
-             <div id="trainer-explainer">
+             <div id="topic-selection-area" class="hidden">
+                 <p class="mb-4">Choose a topic for your passage:</p>
+                 <div class="flex flex-wrap justify-center gap-3">
+                     <button class="topic-button" data-topic="Australian History">Australian History</button>
+                     <button class="topic-button" data-topic="Astrophysics">Astrophysics</button>
+                     <button class="topic-button" data-topic="Marine Biology">Marine Biology</button>
+                     <button class="topic-button" data-topic="Artificial Intelligence Ethics">AI Ethics</button>
+                     <button class="topic-button" data-topic="Ancient Rome">Ancient Rome</button>
+                 </div>
+                 <div id="loading-indicator" class="hidden mt-4 text-gray-600">Generating passage and questions...</div>
+             </div>
+
+             <div id="trainer-explainer" class="hidden">
                  <p id="explainer-text" class="mb-4">Loading explanation...</p>
                  <button id="explainer-start-button">Start Now</button>
              </div>
@@ -319,6 +333,8 @@
         const trainerExplainer = document.getElementById('trainer-explainer');
         const explainerText = document.getElementById('explainer-text');
         const explainerStartButton = document.getElementById('explainer-start-button');
+        const topicSelectionArea = document.getElementById('topic-selection-area');
+        const loadingIndicator = document.getElementById('loading-indicator');
         const interactiveContentArea = document.getElementById('interactive-content-area');
         const mcqOptionsContainer = document.getElementById('mcq-options-container');
         const mcqOptions = document.getElementById('mcq-options');
@@ -338,7 +354,7 @@
         const calcButtons = calculatorContainer.querySelectorAll('.calc-button');
         const calcMcqContainer = document.getElementById('calc-mcq-container');
         const passageDisplayEl = document.getElementById('passage-display');
-        // const allTrainerButtons = document.querySelectorAll('.trainer-button'); // Not needed if using delegation
+        // const allTrainerButtons = document.querySelectorAll('.trainer-button'); // Not needed
         const heroHeadline = document.getElementById('hero-headline');
         const trainerCards = document.querySelectorAll('.trainer-card');
         const userNameSpan = document.getElementById('user-name');
@@ -364,7 +380,10 @@
         const maxDifficulty = 5;
         let score = 0;
         let questionsAttempted = 0;
-        let currentQuestion = null;
+        let currentQuestion = null; // Holds generated question data for the current session
+        let generatedPassage = ""; // Store generated passage for Gist trainer
+        let generatedGistQuestions = []; // Store generated questions for Gist trainer
+        let currentGistQuestionIndex = 0; // Track which gist question is being shown
         let conclusionsAnsweredCount = 0;
         let timerInterval = null;
         let timeLeft = SESSION_DURATION;
@@ -387,7 +406,23 @@
         const syllogismQuestions = { /* ... */ basic: [ { premises: "Premise A. Premise B.", conclusions: [ { text: "Conclusion 1", answer: true }, { text: "Conclusion 2", answer: false } ] } ], moderate: [ { premises: "Premise C. Premise D.", conclusions: [ { text: "Conclusion 3", answer: false }, { text: "Conclusion 4", answer: true } ] } ], advanced: [ { premises: "Premise E. Premise F.", conclusions: [ { text: "Conclusion 5", answer: true }, { text: "Conclusion 6", answer: false } ] } ] }; // Simplified
 
          // --- Explainer Texts ---
-         const explainerTexts = { /* ... */ percentage: "Practice calculating percentages...", sdt: "Solve problems involving Speed, Distance, and Time...", mental: "Test your mental arithmetic!...", calc: "Use the on-screen UCAT-style calculator...", 'syllogism-basic': "Read the premises carefully. For each conclusion...", 'syllogism-moderate': "Evaluate slightly more complex arguments...", 'syllogism-advanced': "Analyze complex scenarios...", 'venn-diagram': "Interpret Venn diagrams (Placeholder)...", 'speed-reading': "Read the provided passage quickly... (Placeholder)", 'gist-training': "Read the passage and identify the main idea... (Placeholder)", 'pre-selecting': "Quickly scan the passage to identify keywords... (Placeholder)" };
+         const explainerTexts = {
+            percentage: "Practice calculating percentages. Find percentages of numbers, calculate increases/decreases, and work with reverse percentages. Choose the correct answer from the options.",
+            sdt: "Solve problems involving Speed, Distance, and Time. You might need to calculate one variable given the other two, handle different units (like minutes/hours), or analyze two-part journeys.",
+            mental: "Test your mental arithmetic! Solve calculations involving addition, subtraction, multiplication, division, decimals, fractions, and squares/roots without a calculator.",
+            calc: "Use the on-screen UCAT-style calculator to solve multi-step calculations. Problems may involve basic operations, percentages, and square roots. Select the correct answer from the options.",
+            'syllogism-basic': "Read the premises carefully. For each conclusion presented below, decide if it logically MUST follow ('Yes') or DOES NOT necessarily follow ('No') based *only* on the given premises.",
+            'syllogism-moderate': "Evaluate slightly more complex arguments. Read the premises carefully. For each conclusion, decide if it logically MUST follow ('Yes') or DOES NOT necessarily follow ('No') based *only* on the given premises.",
+            'syllogism-advanced': "Analyze complex scenarios with multiple premises and potential logical traps. Read the premises carefully. For each conclusion, decide if it logically MUST follow ('Yes') or DOES NOT necessarily follow ('No') based *only* on the given premises.",
+            'venn-diagram': "Interpret Venn diagrams to determine relationships between sets (Placeholder - functionality not yet built).",
+            'speed-reading': "Read the provided passage quickly and accurately, then answer a comprehension question (Placeholder - functionality not yet built).",
+            'gist-training': "Read the passage, identify the main idea, and choose the best summary.",
+            'pre-selecting': "Quickly scan the passage to identify keywords related to a specific question (Placeholder - functionality not yet built).",
+            'info-locator': "Quickly find specific pieces of information within the provided text (Placeholder - functionality not yet built).",
+            'key-idea-scan': "Scan the passage to identify the main arguments or key ideas presented (Placeholder - functionality not yet built).",
+            'info-retention': "Read a passage and answer questions testing your recall of specific details (Placeholder - functionality not yet built).",
+            'logic-puzzles': "Solve logic puzzles based on a set of rules or constraints (Placeholder - functionality not yet built)."
+        };
 
 
         // --- Helper Functions ---
@@ -455,7 +490,9 @@
             }
              // Re-initialize icons if needed after dynamic content change
              try {
-                 lucide.createIcons();
+                 if (typeof lucide !== 'undefined') { // Check if lucide is loaded
+                    lucide.createIcons();
+                 }
              } catch(e){ console.error("Lucide error on heatmap render", e)}
         }
 
@@ -490,49 +527,345 @@
         function generatePercentageQuestion() { /* ... */ let questionText = ""; let correctAnswer = 0; let num1, num2, percent; switch (currentDifficulty) { case 1: percent = getRandomInt(1, 19) * 5; num1 = getRandomInt(2, 20) * 10; questionText = `What is ${percent}% of ${num1}?`; correctAnswer = (percent / 100) * num1; break; case 2: const possiblePercents = [10, 20, 25, 40, 50, 60, 75, 80]; percent = possiblePercents[getRandomInt(0, possiblePercents.length - 1)]; num2 = getRandomInt(4, 25) * (100 / percent); if (num2 < 10) num2 *= 2; num1 = roundTo((percent / 100) * num2, 0); if (Math.random() > 0.5) { questionText = `What percentage of ${num2} is ${num1}?`; } else { questionText = `${num1} is what percentage of ${num2}?`; } correctAnswer = percent; break; case 3: num1 = getRandomInt(50, 500); percent = getRandomInt(5, 50); const increase = Math.random() > 0.5; if (increase) { questionText = `Increase ${num1} by ${percent}%.`; correctAnswer = num1 * (1 + percent / 100); } else { questionText = `Decrease ${num1} by ${percent}%.`; correctAnswer = num1 * (1 - percent / 100); } correctAnswer = roundTo(correctAnswer, 2); break; case 4: let finalAmount = getRandomInt(50, 1000); percent = getRandomInt(10, 40); const discounted = Math.random() > 0.5; if (discounted) { questionText = `After a ${percent}% discount, an item costs $${finalAmount}. What was the original price?`; correctAnswer = finalAmount / (1 - percent / 100); } else { questionText = `After a ${percent}% price increase, an item costs $${finalAmount}. What was the original price?`; correctAnswer = finalAmount / (1 + percent / 100); } correctAnswer = roundTo(correctAnswer, 2); break; case 5: default: num1 = getRandomInt(100, 1000); percent = getRandomFloat(5, 35, 1); let percent2 = getRandomInt(10, 25); let operation1 = Math.random() > 0.5 ? 'increase' : 'decrease'; let intermediateValue = roundTo((percent / 100) * num1, 2); if (operation1 === 'increase') { questionText = `Calculate ${percent}% of ${num1}, then increase the result by ${percent2}%. (Round final answer to 2 decimal places)`; correctAnswer = intermediateValue * (1 + percent2 / 100); } else { questionText = `Calculate ${percent}% of ${num1}, then decrease the result by ${percent2}%. (Round final answer to 2 decimal places)`; correctAnswer = intermediateValue * (1 - percent2 / 100); } correctAnswer = roundTo(correctAnswer, 2); break; } correctAnswer = roundTo(correctAnswer, 4); let distractors = generateDistractors(correctAnswer, currentDifficulty, 'percentage'); let options = shuffleArray([correctAnswer, ...distractors]); return { text: questionText, answer: correctAnswer, options: options, type: 'mcq' }; }
         function generateSDTQuestion() { /* ... */ let questionText = ""; let correctAnswer = 0; let speed, distance, time; const units = { speed: 'km/h', distance: 'km', time: 'hours' }; const find = ['speed', 'distance', 'time'][getRandomInt(0, 2)]; switch (currentDifficulty) { case 1: if (find === 'distance') { speed = getRandomInt(40, 100); time = getRandomInt(2, 5); distance = speed * time; questionText = `A car travels at ${speed} ${units.speed} for ${time} ${units.time}. How far does it travel (in ${units.distance})?`; correctAnswer = distance; } else if (find === 'speed') { time = getRandomInt(2, 5); distance = getRandomInt(100, 500); distance = time * getRandomInt(Math.ceil(50/time), Math.floor(200/time)); speed = distance / time; questionText = `A train covers ${distance} ${units.distance} in ${time} ${units.time}. What is its average speed (in ${units.speed})?`; correctAnswer = speed; } else { speed = getRandomInt(50, 120); distance = getRandomInt(100, 600); distance = speed * getRandomInt(Math.ceil(100/speed), Math.floor(600/speed)); time = distance / speed; questionText = `How long (in ${units.time}) does it take to travel ${distance} ${units.distance} at an average speed of ${speed} ${units.speed}?`; correctAnswer = time; } break; case 2: if (find === 'distance') { speed = getRandomInt(40, 100); time = getRandomInt(1, 4) + [0.25, 0.5, 0.75][getRandomInt(0,2)]; distance = speed * time; questionText = `Speed: ${speed} ${units.speed}, Time: ${time} ${units.time}. Find Distance (in ${units.distance}).`; correctAnswer = distance; } else if (find === 'speed') { time = getRandomInt(1, 4) + [0.25, 0.5, 0.75][getRandomInt(0,2)]; distance = getRandomInt(100, 500); speed = distance / time; questionText = `Distance: ${distance} ${units.distance}, Time: ${time} ${units.time}. Find Speed (in ${units.speed}, round to 1 decimal place).`; correctAnswer = roundTo(speed, 1); } else { speed = getRandomInt(50, 120); distance = getRandomInt(100, 600); time = distance / speed; questionText = `Distance: ${distance} ${units.distance}, Speed: ${speed} ${units.speed}. Find Time (in ${units.time}, round to 2 decimal places).`; correctAnswer = roundTo(time, 2); } break; case 3: let timeMinutes; if (find === 'distance') { speed = getRandomInt(40, 90); timeMinutes = getRandomInt(30, 180); time = timeMinutes / 60; distance = speed * time; questionText = `A cyclist travels at ${speed} ${units.speed} for ${timeMinutes} minutes. How far (in ${units.distance})?`; correctAnswer = roundTo(distance, 1); } else if (find === 'speed') { timeMinutes = getRandomInt(30, 180); time = timeMinutes / 60; distance = getRandomInt(50, 300); speed = distance / time; questionText = `Covering ${distance} ${units.distance} in ${timeMinutes} minutes. Find average speed (in ${units.speed}, round to nearest whole number).`; correctAnswer = roundTo(speed, 0); } else { speed = getRandomInt(50, 120); distance = getRandomInt(50, 400); time = distance / speed; timeMinutes = time * 60; questionText = `How many minutes does it take to travel ${distance} ${units.distance} at ${speed} ${units.speed}? (Round to nearest minute)`; correctAnswer = roundTo(timeMinutes, 0); } break; case 4: let speed1 = getRandomInt(40, 60); let time1 = getRandomInt(1, 3); let dist1 = speed1 * time1; let speed2 = getRandomInt(70, 100); let time2 = getRandomInt(1, 3); let dist2 = speed2 * time2; let totalDist = dist1 + dist2; let totalTime = time1 + time2; let avgSpeed = totalDist / totalTime; const partFind = ['total distance', 'total time', 'average speed'][getRandomInt(0, 2)]; if (partFind === 'total distance') { questionText = `Stage 1: ${speed1} ${units.speed} for ${time1} ${units.time}. Stage 2: ${speed2} ${units.speed} for ${time2} ${units.time}. Find total distance (in ${units.distance}).`; correctAnswer = totalDist; } else if (partFind === 'total time') { dist1 = getRandomInt(50, 150); dist2 = getRandomInt(100, 300); time1 = dist1 / speed1; time2 = dist2 / speed2; totalTime = time1 + time2; questionText = `Stage 1: ${dist1} ${units.distance} at ${speed1} ${units.speed}. Stage 2: ${dist2} ${units.distance} at ${speed2} ${units.speed}. Find total time (in ${units.time}, round to 1 decimal place).`; correctAnswer = roundTo(totalTime, 1); } else { questionText = `Stage 1: ${speed1} ${units.speed} for ${time1} ${units.time}. Stage 2: ${speed2} ${units.speed} for ${time2} ${units.time}. Find average speed for the whole journey (in ${units.speed}, round to 1 decimal place).`; correctAnswer = roundTo(avgSpeed, 1); } break; case 5: default: let speed_ms = getRandomInt(10, 30); let speed_kmh = speed_ms * 3.6; questionText = `A runner's speed is ${speed_ms} m/s. What is this speed in km/h?`; correctAnswer = roundTo(speed_kmh, 1); break; } correctAnswer = roundTo(correctAnswer, 4); let distractors = generateDistractors(correctAnswer, currentDifficulty, 'sdt'); let options = shuffleArray([correctAnswer, ...distractors]); return { text: questionText, answer: correctAnswer, options: options, type: 'mcq' }; }
         function generateMentalMathsQuestion() { /* ... */ let questionText = "Calculate: "; let correctAnswer = 0; let num1, num2, num3, operation1, operation2; switch (currentDifficulty) { case 1: num1 = getRandomInt(10, 99); num2 = getRandomInt(10, 99); if (Math.random() > 0.5) { if (num1 + num2 > 150) num2 = getRandomInt(10, 150 - num1); questionText += `${num1} + ${num2}`; correctAnswer = num1 + num2; } else { if (num1 < num2) [num1, num2] = [num2, num1]; questionText += `${num1} - ${num2}`; correctAnswer = num1 - num2; } break; case 2: if (Math.random() > 0.5) { num1 = getRandomInt(2, 12); num2 = getRandomInt(2, 12); questionText += `${num1} × ${num2}`; correctAnswer = num1 * num2; } else { num2 = getRandomInt(2, 10); correctAnswer = getRandomInt(2, 10); num1 = num2 * correctAnswer; questionText += `${num1} ÷ ${num2}`; } break; case 3: num1 = getRandomInt(1, 10); num2 = getRandomInt(1, 10); num3 = getRandomInt(2, 10); operation1 = ['+', '-'][getRandomInt(0, 1)]; operation2 = ['*', '/'][getRandomInt(0, 1)]; if (operation2 === '/') { let tempResult = (operation1 === '+') ? (num1 + num2) : (num1 - num2); if (tempResult < 0) tempResult *= -1; if (tempResult === 0) tempResult = num3 * getRandomInt(1,5); num3 = getRandomInt(1,5); tempResult = num3 * getRandomInt(Math.ceil(tempResult/num3/2), Math.ceil(tempResult/num3)); if (operation1 === '+') num2 = tempResult - num1; else num1 = tempResult + num2; } if (Math.random() > 0.5) { if (operation1 === '+' && operation2 === '*') { correctAnswer = (num1 + num2) * num3; questionText += `(${num1} + ${num2}) × ${num3}`; } else if (operation1 === '+' && operation2 === '/') { correctAnswer = (num1 + num2) / num3; questionText += `(${num1} + ${num2}) ÷ ${num3}`; } else if (operation1 === '-' && operation2 === '*') { correctAnswer = (num1 - num2) * num3; questionText += `(${num1} - ${num2}) × ${num3}`; } else { correctAnswer = (num1 - num2) / num3; questionText += `(${num1} - ${num2}) ÷ ${num3}`; } } else { if (operation1 === '+' && operation2 === '*') { correctAnswer = num1 + (num2 * num3); questionText += `${num1} + ${num2} × ${num3}`; } else if (operation1 === '+' && operation2 === '/') { num2 = num3 * getRandomInt(2,10); correctAnswer = num1 + (num2 / num3); questionText += `${num1} + ${num2} ÷ ${num3}`; } else if (operation1 === '-' && operation2 === '*') { correctAnswer = num1 - (num2 * num3); questionText += `${num1} - ${num2} × ${num3}`; } else { num2 = num3 * getRandomInt(2,10); correctAnswer = num1 - (num2 / num3); questionText += `${num1} - ${num2} ÷ ${num3}`; } } break; case 4: if (Math.random() > 0.5) { num1 = getRandomInt(1, 20) + 0.5; num2 = getRandomInt(2, 10); operation1 = ['+', '-', '*'][getRandomInt(0, 2)]; if (operation1 === '+') { questionText += `${num1} + ${num2}`; correctAnswer = num1 + num2;} else if (operation1 === '-') { questionText += `${num1} - ${num2}`; correctAnswer = num1 - num2;} else { questionText += `${num1} × ${num2}`; correctAnswer = num1 * num2;} correctAnswer = roundTo(correctAnswer, 1); } else { let den = [2, 4, 8][getRandomInt(0, 2)]; num1 = getRandomInt(1, den - 1); num2 = getRandomInt(1, den - 1); operation1 = ['+', '-'][getRandomInt(0, 1)]; if (operation1 === '+') { questionText += `${num1}/${den} + ${num2}/${den}`; correctAnswer = (num1 + num2) / den; } else { if (num1 < num2) [num1, num2] = [num2, num1]; questionText += `${num1}/${den} - ${num2}/${den}`; correctAnswer = (num1 - num2) / den; } correctAnswer = roundTo(correctAnswer, 3); questionText += " (as a decimal)"; } break; case 5: default: if (Math.random() > 0.6) { num1 = getRandomInt(2, 10); num2 = getRandomInt(10, 50); operation1 = ['+', '-', '*'][getRandomInt(0, 2)]; if (Math.random() > 0.5) { questionText += `${num1}² ${operation1} ${num2}`; if (operation1 === '+') correctAnswer = (num1*num1) + num2; else if (operation1 === '-') correctAnswer = (num1*num1) - num2; else correctAnswer = (num1*num1) * num2; } else { let num1Sq = num1 * num1; questionText += `√${num1Sq} ${operation1} ${num2}`; if (operation1 === '+') correctAnswer = num1 + num2; else if (operation1 === '-') correctAnswer = num1 - num2; else correctAnswer = num1 * num2; } } else { num1 = getRandomInt(11, 20); num2 = getRandomInt(11, 20); num3 = getRandomInt(10, 100); operation1 = ['+', '-'][getRandomInt(0, 1)]; questionText += `${num1} × ${num2} ${operation1} ${num3}`; if (operation1 === '+') correctAnswer = (num1 * num2) + num3; else correctAnswer = (num1 * num2) - num3; } break; } correctAnswer = roundTo(correctAnswer, 4); let distractors = generateDistractors(correctAnswer, currentDifficulty, 'mental'); let options = shuffleArray([correctAnswer, ...distractors]); return { text: questionText, answer: correctAnswer, options: options, type: 'mcq' }; }
-        function generateCalcTrainerQuestion() { /* ... */ let questionText = "Use Calculator: "; let correctAnswer = 0; let num1, num2, num3, num4, percent; switch (currentDifficulty) { case 1: num1 = getRandomInt(10, 500); num2 = getRandomInt(5, 50); const op1 = ['+', '-', '*', '/'][getRandomInt(0, 3)]; if (op1 === '/') num1 = num2 * getRandomInt(2, 20); questionText += `${num1} ${op1} ${num2}`; if (op1 === '+') correctAnswer = num1 + num2; else if (op1 === '-') correctAnswer = num1 - num2; else if (op1 === '*') correctAnswer = num1 * num2; else correctAnswer = num1 / num2; break; case 2: num1 = getRandomInt(10, 200); num2 = getRandomInt(5, 50); num3 = getRandomInt(2, 20); const op2a = ['+', '-'][getRandomInt(0, 1)]; const op2b = ['*', '/'][getRandomInt(0, 1)]; if (op2b === '/') num2 = num3 * getRandomInt(2, 10); questionText += `${num1} ${op2a} ${num2} ${op2b} ${num3}`; let intermediate = (op2b === '*') ? num2 * num3 : num2 / num3; correctAnswer = (op2a === '+') ? num1 + intermediate : num1 - intermediate; break; case 3: if (Math.random() > 0.5) { num1 = getRandomInt(50, 1500); percent = getRandomInt(5, 45); const increase = Math.random() > 0.5; if (increase) { questionText += `Increase ${num1} by ${percent}%`; correctAnswer = num1 * (1 + percent / 100); } else { questionText += `Decrease ${num1} by ${percent}%`; correctAnswer = num1 * (1 - percent / 100); } } else { num1 = getRandomInt(5, 20); num2 = getRandomInt(10, 100); const op3 = ['+', '*', '-'][getRandomInt(0,2)]; let num1Sq = num1 * num1; questionText += `√${num1Sq} ${op3} ${num2}`; if (op3 === '+') correctAnswer = num1 + num2; else if (op3 === '*') correctAnswer = num1 * num2; else correctAnswer = num1 - num2; } break; case 4: num1 = getRandomFloat(10, 100, 1); num2 = getRandomFloat(5, 50, 1); num3 = getRandomInt(2, 10); num4 = getRandomInt(20, 100); questionText += `(${num1} + ${num2}) * ${num3} - ${num4}`; correctAnswer = (num1 + num2) * num3 - num4; break; case 5: default: num1 = getRandomInt(100, 500); num2 = getRandomInt(5, 20); num3 = getRandomInt(50, 200); percent = getRandomInt(10, 30); num1 = num2 * getRandomInt(Math.ceil(100/num2), Math.ceil(500/num2)); questionText += `(${num1} ÷ ${num2}) + (${percent}% of ${num3})`; correctAnswer = (num1 / num2) + (percent / 100 * num3); break; } correctAnswer = roundTo(correctAnswer, 4); let distractors = generateDistractors(correctAnswer, currentDifficulty, 'calc'); let options = shuffleArray([correctAnswer, ...distractors]); return { text: questionText, answer: correctAnswer, options: options, type: 'mcq' }; }
+        // Enhanced Calc Trainer Question Generator
+        function generateCalcTrainerQuestion() {
+            let questionText = "Use Calculator: ";
+            let correctAnswer = 0;
+            let num1, num2, num3, num4, percent;
+
+            switch (currentDifficulty) {
+                case 1: // Simple +, -, * / with integers or simple decimals
+                    num1 = getRandomInt(10, 500);
+                    num2 = getRandomInt(5, 50);
+                    const op1 = ['+', '-', '*', '/'][getRandomInt(0, 3)];
+                    if (op1 === '/') num1 = num2 * getRandomInt(2, 20); // Ensure integer division result
+                    questionText += `${num1} ${op1} ${num2}`;
+                    if (op1 === '+') correctAnswer = num1 + num2;
+                    else if (op1 === '-') correctAnswer = num1 - num2;
+                    else if (op1 === '*') correctAnswer = num1 * num2;
+                    else correctAnswer = num1 / num2;
+                    break;
+                case 2: // Two steps, basic operations
+                    num1 = getRandomInt(10, 200);
+                    num2 = getRandomInt(5, 50);
+                    num3 = getRandomInt(2, 20);
+                    const op2a = ['+', '-'][getRandomInt(0, 1)];
+                    const op2b = ['*', '/'][getRandomInt(0, 1)];
+                     if (op2b === '/') num2 = num3 * getRandomInt(2, 10); // Ensure integer division
+                    questionText += `${num1} ${op2a} ${num2} ${op2b} ${num3}`;
+                    let intermediate2 = (op2b === '*') ? num2 * num3 : num2 / num3;
+                    correctAnswer = (op2a === '+') ? num1 + intermediate2 : num1 - intermediate2;
+                    break;
+                case 3: // Percentages or square roots involved
+                    if (Math.random() > 0.5) { // Percentage
+                         num1 = getRandomInt(50, 1500);
+                         percent = getRandomInt(5, 45);
+                         const increase = Math.random() > 0.5;
+                         if (increase) {
+                             questionText += `Increase ${num1} by ${percent}%`;
+                             correctAnswer = num1 * (1 + percent / 100);
+                         } else {
+                             questionText += `Decrease ${num1} by ${percent}%`;
+                             correctAnswer = num1 * (1 - percent / 100);
+                         }
+                    } else { // Square root
+                        num1 = getRandomInt(5, 20);
+                        num2 = getRandomInt(10, 100);
+                        const op3 = ['+', '*', '-'][getRandomInt(0,2)];
+                        let num1Sq = num1 * num1;
+                        questionText += `√${num1Sq} ${op3} ${num2}`;
+                        if (op3 === '+') correctAnswer = num1 + num2;
+                        else if (op3 === '*') correctAnswer = num1 * num2;
+                        else correctAnswer = num1 - num2;
+                    }
+                    break;
+                case 4: // Multi-step, requiring memory (e.g., sum of products)
+                    num1 = getRandomInt(10, 50);
+                    num2 = getRandomInt(5, 20);
+                    num3 = getRandomInt(10, 50);
+                    num4 = getRandomInt(5, 20);
+                    questionText += `(${num1} × ${num2}) + (${num3} × ${num4})`;
+                    correctAnswer = (num1 * num2) + (num3 * num4);
+                    break;
+                case 5: // More complex multi-step, possibly involving memory and other functions
+                default:
+                     num1 = getRandomInt(100, 500);
+                     num2 = getRandomInt(5, 20);
+                     num3 = getRandomInt(50, 200);
+                     percent = getRandomInt(10, 30);
+                     num1 = num2 * getRandomInt(Math.ceil(100/num2), Math.ceil(500/num2)); // Ensure first division is reasonable
+                     questionText += `(√${num1*num1}) + (${num1} ÷ ${num2}) - (${percent}% of ${num3})`; // Example needing intermediate steps
+                     correctAnswer = num1 + (num1 / num2) - (percent / 100 * num3);
+                    break;
+            }
+            correctAnswer = roundTo(correctAnswer, 4); // Use higher precision for calc answers
+            let distractors = generateDistractors(correctAnswer, currentDifficulty, 'calc');
+            let options = shuffleArray([correctAnswer, ...distractors]);
+            return { text: questionText, answer: correctAnswer, options: options, type: 'mcq' };
+        }
         // --- NEW DM/VR Generators ---
         function generateSyllogismQuestion(level) { /* ... */ let questionPool; if (level <= 2) questionPool = syllogismQuestions.basic; else if (level <= 4) questionPool = syllogismQuestions.moderate; else questionPool = syllogismQuestions.advanced; const qData = questionPool[getRandomInt(0, questionPool.length - 1)]; return { ...qData, type: 'syllogism' }; }
         function generateVennDiagramQuestion() { /* ... */ return { text: "Which diagram represents 'Some A are B'?", answer: 1, options: ["Diagram 1", "Diagram 2", "Diagram 3", "Diagram 4"], type: 'venn' }; }
-        function generateSpeedReadingQuestion() { /* ... */ let passage = samplePassages[getRandomInt(0, samplePassages.length - 1)]; return { text: "Read the passage and answer:", passage: passage, answer: 1, options: ["Option A", "Option B", "Option C", "Option D"], type: 'speed-reading' }; }
-        function generateGistTrainingQuestion() { /* ... */ let passage = samplePassages[getRandomInt(0, samplePassages.length - 1)]; return { text: "Select the best summary:", passage: passage, answer: 0, options: ["Summary A", "Summary B", "Summary C", "Summary D"], type: 'gist' }; }
+        function generateSpeedReadingQuestion() { /* ... */ let passage = samplePassages[getRandomInt(0, samplePassages.length - 1)]; return { text: "Read the provided passage quickly and accurately, then answer the question.", passage: passage, answer: 1, options: ["Option A", "Option B", "Option C", "Option D"], type: 'speed-reading' }; }
+        function generateGistTrainingQuestion() { /* ... */ if (generatedGistQuestions && generatedGistQuestions.length > currentGistQuestionIndex) { return { passage: generatedPassage, type: 'gist', ...generatedGistQuestions[currentGistQuestionIndex] }; } else { return { text: "Gist questions finished or error.", passage: generatedPassage, type: 'gist', options: [], answer: null }; } }
         function generatePreSelectingQuestion() { /* ... */ let passage = samplePassages[getRandomInt(0, samplePassages.length - 1)]; return { text: "Identify keywords for 'What is the main topic?':", passage: passage, answer: 2, options: ["Keywords A", "Keywords B", "Keywords C", "Keywords D"], type: 'pre-selecting' }; }
+        function generateInfoLocatorQuestion() { return { text: "Find the specific detail 'XYZ' in the passage.", passage: samplePassages[0], answer: 1, options: ["Location A", "Location B", "Location C", "Not Found"], type: 'info-locator' }; }
+        function generateKeyIdeaScanningQuestion() { return { text: "What is the primary argument presented?", passage: samplePassages[1], answer: 0, options: ["Argument A", "Argument B", "Argument C", "Argument D"], type: 'key-idea-scan' }; }
+        function generateInfoRetentionQuestion() { return { text: "Recall the function of [Detail] mentioned earlier.", passage: samplePassages[2], answer: 3, options: ["Function A", "Function B", "Function C", "Function D"], type: 'info-retention' }; }
+        function generateLogicPuzzlesQuestion() { return { text: "If A > B and C < B, which statement is true?", premises:"A > B\nC < B", answer: 0, options: ["A > C", "C > A", "A = C", "Cannot Tell"], type: 'logic-puzzle' }; }
+
 
         // --- General Functions ---
-        function switchToView(viewName) { /* ... */ console.log(`Switching view to: ${viewName}`); currentView = viewName; if (viewName === 'dashboard') { dashboardView.classList.remove('hidden'); trainerView.classList.add('hidden'); stopTimer(); isSessionActive = false; updateGamificationDisplay(); } else if (viewName === 'trainer') { dashboardView.classList.add('hidden'); trainerView.classList.remove('hidden'); trainerExplainer.classList.remove('hidden'); practiceArea.classList.add('hidden'); startArea.classList.add('hidden'); feedbackEl.textContent = ''; feedbackEl.className = 'mt-6 p-3 rounded-lg text-base font-medium min-h-[50px] flex items-center justify-center'; startLevelEl.textContent = currentDifficulty; try { trainerTitleEl.textContent = getTrainerName(currentMode); explainerText.textContent = explainerTexts[currentMode] || "Get ready to practice!"; } catch (e) { console.error("Error setting trainer title or explainer:", e); trainerTitleEl.textContent = "Error"; explainerText.textContent = "Error loading details."; } } else { console.error("Unknown view name:", viewName); } }
+        function switchToView(viewName) {
+             console.log(`Switching view to: ${viewName}`);
+             currentView = viewName;
+             // Hide all views initially
+             dashboardView.classList.add('hidden');
+             trainerView.classList.add('hidden');
+             topicSelectionArea.classList.add('hidden');
+             trainerExplainer.classList.add('hidden');
+             practiceArea.classList.add('hidden');
+             startArea.classList.add('hidden');
+
+             if (viewName === 'dashboard') {
+                 dashboardView.classList.remove('hidden');
+                 stopTimer();
+                 isSessionActive = false;
+                 updateGamificationDisplay();
+             } else if (viewName === 'trainer') {
+                 trainerView.classList.remove('hidden');
+                 feedbackEl.textContent = '';
+                 feedbackEl.className = 'mt-6 p-3 rounded-lg text-base font-medium min-h-[50px] flex items-center justify-center';
+                 startLevelEl.textContent = currentDifficulty;
+                 try {
+                     trainerTitleEl.textContent = getTrainerName(currentMode);
+                     // Show Topic Selection ONLY for Gist Trainer
+                     if (currentMode === 'gist-training') {
+                         topicSelectionArea.classList.remove('hidden');
+                         loadingIndicator.classList.add('hidden'); // Ensure loading is hidden initially
+                     } else {
+                         // For other trainers, show the explainer directly
+                         explainerText.textContent = explainerTexts[currentMode] || "Get ready to practice!";
+                         trainerExplainer.classList.remove('hidden');
+                     }
+                 } catch (e) {
+                     console.error("Error setting trainer title or showing initial step:", e);
+                     trainerTitleEl.textContent = "Error";
+                     explainerText.textContent = "Error loading details.";
+                     trainerExplainer.classList.remove('hidden'); // Show explainer even on error
+                 }
+             } else {
+                 console.error("Unknown view name:", viewName);
+             }
+         }
         function getTrainerName(mode) { /* ... */ const button = document.querySelector(`.trainer-button[data-mode="${mode}"]`); return button ? button.textContent : "Unknown Trainer"; }
-        function displayQuestion() { /* ... */ console.log("Displaying question for mode:", currentMode); isAnswerChecking = false; feedbackEl.textContent = ''; feedbackEl.className = 'mt-6 p-3 rounded-lg text-base font-medium min-h-[50px] flex items-center justify-center'; passageDisplayEl.classList.add('hidden'); premisesArea.classList.add('hidden'); questionArea.classList.remove('hidden'); mcqOptionsContainer.classList.add('hidden'); conclusionsArea.classList.add('hidden'); conclusionsArea.innerHTML = ''; calculatorContainer.classList.add('hidden'); calcMcqContainer.classList.remove('calc-layout'); try { if (currentMode === 'percentage') currentQuestion = generatePercentageQuestion(); else if (currentMode === 'sdt') currentQuestion = generateSDTQuestion(); else if (currentMode === 'mental') currentQuestion = generateMentalMathsQuestion(); else if (currentMode === 'calc') currentQuestion = generateCalcTrainerQuestion(); else if (currentMode.startsWith('syllogism')) currentQuestion = generateSyllogismQuestion(currentDifficulty); else if (currentMode === 'venn-diagram') currentQuestion = generateVennDiagramQuestion(); else if (currentMode === 'speed-reading') currentQuestion = generateSpeedReadingQuestion(); else if (currentMode === 'gist-training') currentQuestion = generateGistTrainingQuestion(); else if (currentMode === 'pre-selecting') currentQuestion = generatePreSelectingQuestion(); else throw new Error(`Invalid mode selected: ${currentMode}`); if (!currentQuestion) throw new Error("Question generation failed."); questionEl.textContent = currentQuestion.text || ''; if (currentQuestion.passage) { passageDisplayEl.textContent = currentQuestion.passage; passageDisplayEl.classList.remove('hidden'); } if (currentQuestion.type === 'syllogism') { premisesArea.textContent = currentQuestion.premises || 'No premises provided.'; premisesArea.classList.remove('hidden'); questionArea.classList.add('hidden'); conclusionsArea.classList.remove('hidden'); mcqOptionsContainer.classList.add('hidden'); conclusionsAnsweredCount = 0; currentQuestion.conclusions.forEach((conclusion, index) => { const div = document.createElement('div'); div.className = 'syllogism-conclusion'; div.innerHTML = ` <span class="conclusion-text">${conclusion.text}</span> <div class="conclusion-buttons"> <button class="yes-btn" data-conclusion-index="${index}" data-answer="true">Yes</button> <button class="no-btn" data-conclusion-index="${index}" data-answer="false">No</button> </div> `; conclusionsArea.appendChild(div); }); } else if (currentQuestion.type === 'mcq' || currentQuestion.options) { mcqOptionsContainer.classList.remove('hidden'); conclusionsArea.classList.add('hidden'); let accentClass = 'qr-accent'; if (currentMode.startsWith('dm') || currentMode.startsWith('syllogism') || currentMode === 'venn') accentClass = 'dm-accent'; else if (currentMode.startsWith('vr') || currentMode === 'speed-reading' || currentMode === 'gist' || currentMode === 'pre-selecting') accentClass = 'vr-accent'; else if (currentMode === 'calc') accentClass = 'qr-accent'; if (currentMode === 'calc') { calcMcqContainer.classList.add('calc-layout'); calculatorContainer.classList.remove('hidden'); resetCalculator(true); } if (currentQuestion.options.length === 4) { mcqOptionButtons.forEach((button, index) => { const optionValue = currentQuestion.options[index]; let displayOption = Number.isInteger(optionValue) ? optionValue : roundTo(optionValue, 2); button.textContent = displayOption; button.dataset.value = optionValue; button.className = `mcq-option ${accentClass}`; button.disabled = false; }); } else { throw new Error("MCQ question generated without 4 options."); } } else { mcqOptionsContainer.classList.add('hidden'); conclusionsArea.classList.add('hidden'); } console.log("Question displayed:", currentQuestion); } catch (error) { console.error("Error during question generation or display:", error); questionEl.textContent = "Error displaying question."; mcqOptionsContainer.classList.add('hidden'); passageDisplayEl.classList.add('hidden'); calculatorContainer.classList.add('hidden'); conclusionsArea.classList.add('hidden'); currentQuestion = null; } }
+        function displayQuestion() {
+            console.log("Displaying question for mode:", currentMode);
+            isAnswerChecking = false;
+            feedbackEl.textContent = '';
+            feedbackEl.className = 'mt-6 p-3 rounded-lg text-base font-medium min-h-[50px] flex items-center justify-center';
+            passageDisplayEl.classList.add('hidden');
+            premisesArea.classList.add('hidden');
+            questionArea.classList.remove('hidden');
+            mcqOptionsContainer.classList.add('hidden');
+            conclusionsArea.classList.add('hidden');
+            conclusionsArea.innerHTML = '';
+            calculatorContainer.classList.add('hidden');
+            calcMcqContainer.classList.remove('calc-layout');
+
+            try {
+                // --- Generate or Retrieve Question Object ---
+                if (currentMode === 'gist-training') { currentQuestion = generateGistTrainingQuestion(); }
+                else if (currentMode === 'percentage') currentQuestion = generatePercentageQuestion();
+                else if (currentMode === 'sdt') currentQuestion = generateSDTQuestion();
+                else if (currentMode === 'mental') currentQuestion = generateMentalMathsQuestion();
+                else if (currentMode === 'calc') currentQuestion = generateCalcTrainerQuestion();
+                else if (currentMode.startsWith('syllogism')) currentQuestion = generateSyllogismQuestion(currentDifficulty);
+                else if (currentMode === 'venn-diagram') currentQuestion = generateVennDiagramQuestion();
+                else if (currentMode === 'speed-reading') currentQuestion = generateSpeedReadingQuestion();
+                else if (currentMode === 'pre-selecting') currentQuestion = generatePreSelectingQuestion();
+                else if (currentMode === 'info-locator') currentQuestion = generateInfoLocatorQuestion();
+                else if (currentMode === 'key-idea-scan') currentQuestion = generateKeyIdeaScanningQuestion();
+                else if (currentMode === 'info-retention') currentQuestion = generateInfoRetentionQuestion();
+                else if (currentMode === 'logic-puzzles') currentQuestion = generateLogicPuzzlesQuestion();
+                else throw new Error(`Invalid mode selected: ${currentMode}`);
+
+                if (!currentQuestion) throw new Error("Question generation failed.");
+
+                // --- Configure UI based on Question Type ---
+                questionEl.textContent = currentQuestion.text || '';
+
+                if (currentQuestion.passage) {
+                    passageDisplayEl.textContent = currentQuestion.passage;
+                    passageDisplayEl.classList.remove('hidden');
+                }
+
+                if (currentQuestion.type === 'syllogism') {
+                    premisesArea.textContent = currentQuestion.premises || 'No premises provided.';
+                    premisesArea.classList.remove('hidden');
+                    questionArea.classList.add('hidden');
+                    conclusionsArea.classList.remove('hidden');
+                    mcqOptionsContainer.classList.add('hidden');
+                    conclusionsAnsweredCount = 0;
+                    currentQuestion.conclusions.forEach((conclusion, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'syllogism-conclusion';
+                        div.innerHTML = ` <span class="conclusion-text">${conclusion.text}</span> <div class="conclusion-buttons"> <button class="yes-btn" data-conclusion-index="${index}" data-answer="true">Yes</button> <button class="no-btn" data-conclusion-index="${index}" data-answer="false">No</button> </div> `;
+                        conclusionsArea.appendChild(div);
+                    });
+                } else if (currentQuestion.type === 'mcq' || currentQuestion.options || currentQuestion.type === 'gist' || currentQuestion.type === 'venn' || currentQuestion.type === 'speed-reading' || currentQuestion.type === 'pre-selecting' || currentQuestion.type === 'info-locator' || currentQuestion.type === 'key-idea-scan' || currentQuestion.type === 'info-retention' || currentQuestion.type === 'logic-puzzle') { // Include all MCQ types
+                    mcqOptionsContainer.classList.remove('hidden');
+                    conclusionsArea.classList.add('hidden');
+                    let accentClass = 'qr-accent'; // Default
+                    if (currentMode.startsWith('dm') || currentMode.startsWith('syllogism') || currentMode === 'venn' || currentMode === 'logic-puzzle') accentClass = 'dm-accent';
+                    else if (currentMode.startsWith('vr') || currentMode === 'speed-reading' || currentMode === 'gist' || currentMode === 'pre-selecting' || currentMode === 'info-locator' || currentMode === 'key-idea-scan' || currentMode === 'info-retention') accentClass = 'vr-accent';
+                    else if (currentMode === 'calc') accentClass = 'qr-accent';
+
+                    if (currentMode === 'calc') {
+                         calcMcqContainer.classList.add('calc-layout');
+                         calculatorContainer.classList.remove('hidden');
+                         resetCalculator(true);
+                    }
+
+                    if (currentQuestion.options && currentQuestion.options.length === 4) {
+                        mcqOptionButtons.forEach((button, index) => {
+                            const optionValue = currentQuestion.options[index];
+                            button.textContent = typeof optionValue === 'number' ? (Number.isInteger(optionValue) ? optionValue : roundTo(optionValue, 2)) : optionValue;
+                            button.dataset.value = optionValue;
+                            button.className = `mcq-option ${accentClass}`;
+                            button.disabled = false;
+                        });
+                    } else if (currentQuestion.options && currentQuestion.options.length > 0){
+                         console.warn("MCQ question generated with incorrect number of options:", currentQuestion.options.length);
+                         mcqOptionsContainer.classList.add('hidden');
+                    } else {
+                         mcqOptionsContainer.classList.add('hidden');
+                         if(currentMode === 'gist-training' && currentGistQuestionIndex >= generatedGistQuestions.length) { // Check if truly out of questions
+                             feedbackEl.textContent = "No more questions for this passage.";
+                         }
+                    }
+                } else {
+                     mcqOptionsContainer.classList.add('hidden');
+                     conclusionsArea.classList.add('hidden');
+                }
+                console.log("Question displayed:", currentQuestion);
+            } catch (error) { console.error("Error during question generation or display:", error); questionEl.textContent = "Error displaying question."; mcqOptionsContainer.classList.add('hidden'); passageDisplayEl.classList.add('hidden'); calculatorContainer.classList.add('hidden'); conclusionsArea.classList.add('hidden'); currentQuestion = null; }
+        }
         function updateUI() { /* ... */ scoreEl.textContent = score; difficultyLevelEl.textContent = currentDifficulty; startLevelEl.textContent = currentDifficulty; if (!isSessionActive) { timeLeft = SESSION_DURATION; updateTimerDisplay(); } }
         function handleAnswerClick(event) { /* ... */ if (!isSessionActive || !isTimerRunning || isAnswerChecking) return; const mcqButton = event.target.closest('.mcq-option'); const syllogismButton = event.target.closest('.conclusion-buttons button'); if (mcqButton) { handleMcqAnswer(mcqButton); } else if (syllogismButton) { handleSyllogismAnswer(syllogismButton); } }
-        function handleMcqAnswer(selectedButton) { /* ... */ isAnswerChecking = true; questionsAttempted++; const selectedValue = parseFloat(selectedButton.dataset.value); console.log(`MCQ Option clicked: Value=${selectedValue}, Correct Answer=${currentQuestion.answer}`); mcqOptionButtons.forEach(button => button.disabled = true); const isCorrect = Math.abs(selectedValue - currentQuestion.answer) < ANSWER_TOLERANCE; if (isCorrect) { addPoints(1); score++; scoreEl.textContent = score; selectedButton.classList.add('correct'); console.log("Correct!"); } else { selectedButton.classList.add('incorrect'); console.log("Incorrect."); mcqOptionButtons.forEach(button => { if (Math.abs(parseFloat(button.dataset.value) - currentQuestion.answer) < ANSWER_TOLERANCE) { button.classList.add('correct'); } }); } setTimeout(() => { if (isSessionActive) { displayQuestion(); } }, FEEDBACK_DELAY); }
+        function handleMcqAnswer(selectedButton) {
+            isAnswerChecking = true;
+            questionsAttempted++;
+            const selectedValue = selectedButton.dataset.value;
+            const correctAnswer = currentQuestion.answer;
+            console.log(`MCQ Option clicked: Value='${selectedValue}', Correct Answer='${correctAnswer}'`);
+
+            mcqOptionButtons.forEach(button => button.disabled = true);
+
+            let isCorrect;
+            if (typeof correctAnswer === 'number') {
+                 isCorrect = Math.abs(parseFloat(selectedValue) - correctAnswer) < ANSWER_TOLERANCE;
+            } else {
+                 isCorrect = selectedValue === String(correctAnswer);
+            }
+
+            if (isCorrect) {
+                addPoints(1); score++; scoreEl.textContent = score; selectedButton.classList.add('correct'); console.log("Correct!");
+            } else {
+                selectedButton.classList.add('incorrect'); console.log("Incorrect.");
+                mcqOptionButtons.forEach(button => {
+                    let buttonValue = button.dataset.value;
+                     let comparisonCorrect;
+                     if (typeof correctAnswer === 'number') {
+                         comparisonCorrect = Math.abs(parseFloat(buttonValue) - correctAnswer) < ANSWER_TOLERANCE;
+                     } else {
+                         comparisonCorrect = buttonValue === String(correctAnswer);
+                     }
+                    if (comparisonCorrect) {
+                        button.classList.add('correct');
+                    }
+                });
+            }
+
+             if (currentMode === 'gist-training') {
+                 currentGistQuestionIndex++;
+                 if (currentGistQuestionIndex >= generatedGistQuestions.length) {
+                     console.log("Finished all gist questions for this passage.");
+                      // If out of questions, don't schedule next displayQuestion immediately
+                      // Let timer run out or user go back
+                     isAnswerChecking = false; // Allow interaction again (e.g. back button)
+                     return; // Stop here
+                 }
+             }
+
+            setTimeout(() => { if (isSessionActive) { displayQuestion(); } }, FEEDBACK_DELAY);
+        }
         function handleSyllogismAnswer(selectedButton) { /* ... */ const conclusionIndex = parseInt(selectedButton.dataset.conclusionIndex); const selectedAnswer = selectedButton.dataset.answer === 'true'; const correctAnswer = currentQuestion.conclusions[conclusionIndex].answer; console.log(`Syllogism Conclusion ${conclusionIndex}: Selected=${selectedAnswer}, Correct=${correctAnswer}`); questionsAttempted++; conclusionsAnsweredCount++; const buttonGroup = selectedButton.parentElement; buttonGroup.querySelectorAll('button').forEach(btn => btn.disabled = true); if (selectedAnswer === correctAnswer) { addPoints(1); score++; scoreEl.textContent = score; selectedButton.classList.add('correct'); console.log("Correct!"); } else { selectedButton.classList.add('incorrect'); console.log("Incorrect."); const correctButton = buttonGroup.querySelector(`button[data-answer="${correctAnswer}"]`); if (correctButton) correctButton.classList.add('correct'); } if (conclusionsAnsweredCount >= currentQuestion.conclusions.length) { isAnswerChecking = true; setTimeout(() => { if (isSessionActive) { displayQuestion(); } }, FEEDBACK_DELAY); } }
         function handleTrainerSelection(event) {
              console.log("Dashboard click detected."); // DEBUG
-             // Ensure the click is directly on a button or inside one
              const button = event.target.closest('.trainer-button');
-             if (!button) {
-                 console.log("Click was not on a trainer button or its child."); // DEBUG
-                 return;
-             }
-             // Check if the button has the data-mode attribute
-             if (!button.dataset.mode) {
-                 console.log("Clicked element is missing data-mode attribute."); // DEBUG
+             if (!button || !button.dataset.mode) {
+                 console.log("Click was not on a valid trainer button."); // DEBUG
                  return;
              }
              console.log("Trainer button found:", button); // DEBUG
              currentMode = button.dataset.mode;
-             currentDifficulty = 1; // Reset difficulty
+             currentDifficulty = 1;
              score = 0;
              questionsAttempted = 0;
+             generatedPassage = ""; // Clear any previously generated passage
+             generatedGistQuestions = []; // Clear previous questions
+             currentGistQuestionIndex = 0;
              console.log(`Trainer selected: ${currentMode}. Resetting state.`); // DEBUG
-             switchToView('trainer'); // Switch view
+             switchToView('trainer');
         }
+        /**
+         * Handles clicks on topic buttons for Gist Trainer.
+         * Simulates API calls and content generation.
+         */
+        async function handleTopicSelection(event) {
+             const button = event.target.closest('.topic-button');
+             if (!button) return;
+
+             const selectedTopic = button.dataset.topic;
+             console.log("Topic selected:", selectedTopic);
+
+             topicSelectionArea.classList.add('hidden');
+             loadingIndicator.classList.remove('hidden');
+
+             // --- SIMULATED API CALLS & GENERATION ---
+             console.log(`Simulating search and generation for: ${selectedTopic}`);
+             await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
+
+             try {
+                 // Placeholder generated content (replace with actual generation)
+                 generatedPassage = `This is a generated passage about ${selectedTopic}. It discusses key aspects like [Aspect 1], [Aspect 2], and [Aspect 3]. The implications for ${selectedTopic} are wide-ranging. Further research often focuses on [Further Detail]. Understanding ${selectedTopic} requires considering its historical context and future potential. This passage is approximately 300 words to mimic the UCAT style, providing enough detail for comprehension without being overly lengthy. It avoids overly technical jargon where possible, aiming for broad accessibility suitable for a general audience preparing for aptitude tests. The structure includes an introduction, several supporting points, and a concluding thought, requiring careful reading to grasp the main idea.`;
+                 generatedGistQuestions = [
+                     { text: `What is the main subject discussed in the passage about ${selectedTopic}?`, options: [`The history of ${selectedTopic}`, `Key aspects and implications of ${selectedTopic}`, `Future research in ${selectedTopic}`, `The difficulty of understanding ${selectedTopic}`], answer: `Key aspects and implications of ${selectedTopic}` },
+                     { text: `Which of these is NOT mentioned as a key aspect in the passage?`, options: [`[Aspect 1]`, `[Aspect 2]`, `[Aspect 4 - Distractor]`, `[Aspect 3]`], answer: `[Aspect 4 - Distractor]` },
+                     { text: `What is the overall tone of the passage regarding ${selectedTopic}?`, options: [`Dismissive`, `Informative`, `Alarmist`, `Humorous`], answer: `Informative` },
+                     { text: `The passage suggests that understanding ${selectedTopic} involves considering what?`, options: [`Only future potential`, `Only historical context`, `Its complexity for experts`, `Historical context and future potential`], answer: `Historical context and future potential` }
+                 ];
+                 currentGistQuestionIndex = 0; // Reset index for the new set
+                 console.log("Simulated generation complete.");
+
+                 loadingIndicator.classList.add('hidden');
+                 explainerText.textContent = explainerTexts[currentMode] || "Get ready to practice!";
+                 trainerExplainer.classList.remove('hidden');
+
+             } catch (error) {
+                 console.error("Error during simulated generation:", error);
+                 loadingIndicator.textContent = "Error generating content. Please try again.";
+             }
+             // --- END SIMULATION ---
+        }
+
         function handleExplainerStart() {
              console.log("Explainer Start Now clicked.");
-             trainerExplainer.classList.add('hidden'); // Hide explainer
-             startArea.classList.remove('hidden'); // Show level start button
+             trainerExplainer.classList.add('hidden');
+             startArea.classList.remove('hidden');
          }
-        function handleStartSession() { /* ... */ console.log("handleStartSession called."); try { isSessionActive = true; score = 0; questionsAttempted = 0; conclusionsAnsweredCount = 0; scoreEl.textContent = score; difficultyLevelEl.textContent = currentDifficulty; console.log("Hiding start area, showing practice area..."); startArea.classList.add('hidden'); // Hide level start button area
+        function handleStartSession() { /* ... */ console.log("handleStartSession called."); try { isSessionActive = true; score = 0; questionsAttempted = 0; conclusionsAnsweredCount = 0; scoreEl.textContent = score; difficultyLevelEl.textContent = currentDifficulty; console.log("Hiding start area, showing practice area..."); startArea.classList.add('hidden');
             practiceArea.classList.remove('hidden'); // Show practice content
             feedbackEl.textContent = ''; feedbackEl.className = 'mt-6 p-3 rounded-lg text-base font-medium min-h-[50px] flex items-center justify-center'; displayQuestion(); startTimer(); console.log("handleStartSession completed."); } catch (error) { console.error("Error in handleStartSession:", error); isSessionActive = false; calcMcqContainer.classList.remove('calc-layout'); practiceArea.classList.add('hidden'); startArea.classList.remove('hidden'); alert("An error occurred while starting the session. Please try again."); } }
         function handleKeyboardInput(event) { /* ... */ if (currentMode !== 'calc' || !isSessionActive) return; const key = event.key; let calcKey = null; console.log("Keyboard event:", key); if (key >= '0' && key <= '9') calcKey = key; else if (key === '.') calcKey = '.'; else if (key === '+') calcKey = '+'; else if (key === '-') calcKey = '-'; else if (key === '*') calcKey = '*'; else if (key === '/') calcKey = '/'; else if (key === 'Enter' || key === '=') calcKey = '='; else if (key === '%') calcKey = '%'; else if (key.toLowerCase() === 'c') calcKey = 'MRC'; else if (key.toLowerCase() === 'p') calcKey = 'M+'; else if (key.toLowerCase() === 'm') calcKey = 'M-'; else if (key === 'Backspace' || key === 'Delete') calcKey = 'ON/C'; else if (event.code.startsWith('Numpad')) { if (event.code === 'NumpadDecimal') calcKey = '.'; else if (event.code === 'NumpadAdd') calcKey = '+'; else if (event.code === 'NumpadSubtract') calcKey = '-'; else if (event.code === 'NumpadMultiply') calcKey = '*'; else if (event.code === 'NumpadDivide') calcKey = '/'; else if (event.code.match(/Numpad\d/)) calcKey = event.code.slice(-1); else if (event.code === 'NumpadEnter') calcKey = '='; } if (calcKey) { event.preventDefault(); handleCalcButton(calcKey); const button = calculatorContainer.querySelector(`.calc-button[data-key="${calcKey}"]`); if (button) { button.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.3)'; setTimeout(() => { button.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)'; }, 150); } } }
@@ -540,20 +873,20 @@
 
         function initApp() {
             console.log("Initializing app...");
-            // Added more checks for potentially null elements
-            if (!dashboardView || !trainerView || !reviewScreen || !dashboardCardsContainer || !trainerExplainer || !explainerStartButton || !heatmapPrevBtn || !heatmapNextBtn || !interactiveContentArea || !startButton || !reviewContinueButton || !userNameSpan || !backToDashboardBtn || !heatmapContainer || !heatmapMonthYear) {
+             // Added checks for new elements
+             if (!dashboardView || !trainerView || !reviewScreen || !dashboardCardsContainer || !trainerExplainer || !explainerStartButton || !heatmapPrevBtn || !heatmapNextBtn || !interactiveContentArea || !startButton || !reviewContinueButton || !userNameSpan || !backToDashboardBtn || !heatmapContainer || !heatmapMonthYear || !topicSelectionArea || !loadingIndicator) {
                  console.error("Initialization failed: One or more essential DOM elements not found.");
-                 alert("Error initializing the application. Some elements are missing."); // User feedback
+                 alert("Error initializing the application. Some elements are missing.");
                  return;
-            }
+             }
 
             loadProgress(); // Load progress first
 
             // Attach listeners
-            // FIX: Attach listener to the container of the cards
-            dashboardCardsContainer.addEventListener('click', handleTrainerSelection);
+            dashboardCardsContainer.addEventListener('click', handleTrainerSelection); // Correct delegation target
             backToDashboardBtn.addEventListener('click', () => switchToView('dashboard'));
             interactiveContentArea.addEventListener('click', handleAnswerClick);
+            topicSelectionArea.addEventListener('click', handleTopicSelection); // Listener for topic buttons
             explainerStartButton.addEventListener('click', handleExplainerStart);
             startButton.addEventListener('click', handleStartSession);
             reviewContinueButton.addEventListener('click', handleReviewContinue);
@@ -566,8 +899,12 @@
 
             // Initialize Lucide icons
             try {
-                lucide.createIcons();
-                console.log("Lucide icons initialized.");
+                 if (typeof lucide !== 'undefined') {
+                     lucide.createIcons();
+                     console.log("Lucide icons initialized.");
+                 } else {
+                     console.warn("Lucide library not loaded.");
+                 }
             } catch (error) {
                 console.error("Error initializing Lucide icons:", error);
             }
